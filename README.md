@@ -1,6 +1,6 @@
 # transform-to-matrix
 
-Get 2/3D matricies from CSS3 transform functions. Fully covered by unit tests, with support for AMD, CommonJS, Node, and browser globals.
+A tiny library to get 2/3D matricies from CSS3 transform functions. Fully covered by unit tests, with support for AMD, CommonJS, Node, and browser globals.
 
 ## example
 

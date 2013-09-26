@@ -1,7 +1,7 @@
 {
   "name": "transform-to-matrix",
   "version": "0.0.3",
-  "description": "Get matricies from CSS3 3D transform functions",
+  "description": "A tiny library to get matricies from CSS3 3D transform functions",
   "main": "transform-to-matrix.js",
   "repository": {
     "type": "git",
