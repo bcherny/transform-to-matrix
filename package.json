@@ -1,7 +1,7 @@
 {
   "name": "transform-to-matrix",
   "version": "0.0.1",
-  "description": "Get matricies from CSS3 transform functions",
+  "description": "Get matricies from CSS3 3D transform functions",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -25,5 +25,12 @@
   "license": "BSD",
   "bugs": {
     "url": "https://github.com/eighttrackmind/transform-to-matrix/issues"
+  },
+  "devDependencies": {
+    "phantomjs": "~1.9.2-1",
+    "jsdom": "~0.8.5",
+    "mocha": "~1.13.0",
+    "chai": "~1.8.0",
+    "annie": "~0.1.3"
   }
 }
