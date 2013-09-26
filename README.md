@@ -7,6 +7,13 @@ A tiny library to get 2/3D matricies from CSS3 transform functions. Fully covere
 ```js
 var getMatrix = require('transform-to-matrix'),
 	matrix = getMatrix.translate3d(10, 50, 100)
+	// ->
+	// [
+	// 	  [1, 0, 0, 10],
+	//    [0, 1, 0, 50],
+	//    [0, 0, 1, 100],
+	//    [0, 0, 0, 1]
+	// ]
 ```
 
 ## supported transforms
