@@ -1,0 +1,29 @@
+{
+  "name": "transform-to-matrix",
+  "version": "0.0.1",
+  "description": "Get matricies from CSS3 transform functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eighttrackmind/transform-to-matrix.git"
+  },
+  "keywords": [
+    "matrix",
+    "css",
+    "css3",
+    "transform",
+    "translate",
+    "rotate",
+    "skew",
+    "perspective",
+    "scale"
+  ],
+  "author": "Boris Cherny <boris@performancejs.com>",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/eighttrackmind/transform-to-matrix/issues"
+  }
+}
