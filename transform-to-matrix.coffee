@@ -39,6 +39,17 @@ fns =
 
 	# scale
 
+	scale: (x, y) ->
+
+		[
+			[x, 0, 0]
+			[0, y, 0]
+		]
+
+	scaleX: (x) -> fns.scale x, 1
+	scaleY: (y) -> fns.scale 1, y
+	scaleZ: (z) -> fns.scale3d 1, 1, z
+
 	scale3d: (x, y, z) ->
 
 		[
@@ -81,8 +92,8 @@ fns =
 		]
 
 	translateX: (x) -> fns.translate x, 0
-
 	translateY: (y) -> fns.translate 0, y
+	translateZ: (z) -> fns.translate3d 0, 0, z
 
 	translate3d: (x, y, z) ->
 

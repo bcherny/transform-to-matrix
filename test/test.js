@@ -36,7 +36,7 @@
 
   styleToArray = function(transform) {
     var i, num, nums, sliceStart, style, _i, _len;
-    sliceStart = transform.indexOf('3d') > -1 ? 9 : 7;
+    sliceStart = transform.indexOf('3d') > -1 || transform.indexOf('Z') > -1 ? 9 : 7;
     div.style[annie.transform] = transform;
     style = getComputedStyle(div)[annie.transform].slice(sliceStart, -1);
     nums = style.split(', ');
@@ -84,6 +84,38 @@
         return expect(ttm).to.eql(browser);
       });
     });
+    describe('#scale', function() {
+      return it('should compute the same matrix as the browser', function() {
+        var browser, ttm;
+        ttm = rotateMatrix(transformToMatrix.scale(2, 3));
+        browser = styleToArray('scale(2, 3)');
+        return expect(ttm).to.eql(browser);
+      });
+    });
+    describe('#scaleX', function() {
+      return it('should compute the same matrix as the browser', function() {
+        var browser, ttm;
+        ttm = rotateMatrix(transformToMatrix.scaleX(2));
+        browser = styleToArray('scaleX(2)');
+        return expect(ttm).to.eql(browser);
+      });
+    });
+    describe('#scaleY', function() {
+      return it('should compute the same matrix as the browser', function() {
+        var browser, ttm;
+        ttm = rotateMatrix(transformToMatrix.scaleY(2));
+        browser = styleToArray('scaleY(2)');
+        return expect(ttm).to.eql(browser);
+      });
+    });
+    describe('#scaleZ', function() {
+      return it('should compute the same matrix as the browser', function() {
+        var browser, ttm;
+        ttm = rotateMatrix(transformToMatrix.scaleZ(2));
+        browser = styleToArray('scaleZ(2)');
+        return expect(ttm).to.eql(browser);
+      });
+    });
     describe('#skew', function() {
       return it('should compute the same matrix as the browser', function() {
         var browser, ttm;
@@ -124,11 +156,19 @@
         return expect(ttm).to.eql(browser);
       });
     });
-    return describe('#translateY', function() {
+    describe('#translateY', function() {
       return it('should compute the same matrix as the browser', function() {
         var browser, ttm;
         ttm = rotateMatrix(transformToMatrix.translateY(10));
         browser = styleToArray('translateY(10px)');
+        return expect(ttm).to.eql(browser);
+      });
+    });
+    return describe('#translateZ', function() {
+      return it('should compute the same matrix as the browser', function() {
+        var browser, ttm;
+        ttm = rotateMatrix(transformToMatrix.translateZ(10));
+        browser = styleToArray('translateZ(10px)');
         return expect(ttm).to.eql(browser);
       });
     });

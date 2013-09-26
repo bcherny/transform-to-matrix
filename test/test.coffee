@@ -30,7 +30,7 @@ rotateMatrix = (matrix) ->
 	result
 
 styleToArray = (transform) ->
-	sliceStart = if transform.indexOf('3d') > -1 then 9 else 7
+	sliceStart = if transform.indexOf('3d') > -1 or transform.indexOf('Z') > -1 then 9 else 7
 	div.style[annie.transform] = transform
 	style = getComputedStyle(div)[annie.transform].slice sliceStart, -1
 	nums = style.split ', '
@@ -64,6 +64,32 @@ describe '2D', ->
 		it 'should compute the same matrix as the browser', ->
 			ttm = rotateMatrix transformToMatrix.perspective(10)
 			browser = styleToArray 'perspective(10px)'
+			expect(ttm).to.eql browser
+
+	# scale
+	
+	describe '#scale', ->
+		it 'should compute the same matrix as the browser', ->
+			ttm = rotateMatrix transformToMatrix.scale(2, 3)
+			browser = styleToArray 'scale(2, 3)'
+			expect(ttm).to.eql browser
+	
+	describe '#scaleX', ->
+		it 'should compute the same matrix as the browser', ->
+			ttm = rotateMatrix transformToMatrix.scaleX(2)
+			browser = styleToArray 'scaleX(2)'
+			expect(ttm).to.eql browser
+	
+	describe '#scaleY', ->
+		it 'should compute the same matrix as the browser', ->
+			ttm = rotateMatrix transformToMatrix.scaleY(2)
+			browser = styleToArray 'scaleY(2)'
+			expect(ttm).to.eql browser
+	
+	describe '#scaleZ', ->
+		it 'should compute the same matrix as the browser', ->
+			ttm = rotateMatrix transformToMatrix.scaleZ(2)
+			browser = styleToArray 'scaleZ(2)'
 			expect(ttm).to.eql browser
 
 	# skew
@@ -104,6 +130,12 @@ describe '2D', ->
 		it 'should compute the same matrix as the browser', ->
 			ttm = rotateMatrix transformToMatrix.translateY(10)
 			browser = styleToArray 'translateY(10px)'
+			expect(ttm).to.eql browser
+	
+	describe '#translateZ', ->
+		it 'should compute the same matrix as the browser', ->
+			ttm = rotateMatrix transformToMatrix.translateZ(10)
+			browser = styleToArray 'translateZ(10px)'
 			expect(ttm).to.eql browser
 
 runner = mocha.run()

@@ -25,6 +25,18 @@
       rs = Math.sqrt(s) * n;
       return [[(x * x + (y * y + z * z) * c) / s, (x * y * i - z * rs) / s, (x * z * i + y * rs) / s, 0], [(x * y * i + z * rs) / s, (y * y + (x * x + z * z) * c) / s, (y * z * i - x * rs) / s, 0], [(x * z * i - y * rs) / s, (y * z * i + x * rs) / s, (z * z + (x * x + y * y) * c) / s, 0], [0, 0, 0, 1]];
     },
+    scale: function(x, y) {
+      return [[x, 0, 0], [0, y, 0]];
+    },
+    scaleX: function(x) {
+      return fns.scale(x, 1);
+    },
+    scaleY: function(y) {
+      return fns.scale(1, y);
+    },
+    scaleZ: function(z) {
+      return fns.scale3d(1, 1, z);
+    },
     scale3d: function(x, y, z) {
       return [[x, 0, 0, 0], [0, y, 0, 0], [0, 0, z, 0], [0, 0, 0, 1]];
     },
@@ -45,6 +57,9 @@
     },
     translateY: function(y) {
       return fns.translate(0, y);
+    },
+    translateZ: function(z) {
+      return fns.translate3d(0, 0, z);
     },
     translate3d: function(x, y, z) {
       return [[1, 0, 0, x], [0, 1, 0, y], [0, 0, 1, z], [0, 0, 0, 1]];
