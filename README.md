@@ -1,5 +1,7 @@
 # transform-to-matrix
 
+*Pre-alpha --- unstable!*
+
 Get matricies from CSS3 3D transform functions
 
 # see
