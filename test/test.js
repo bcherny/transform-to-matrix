@@ -111,7 +111,6 @@
         var browser, ttm;
         ttm = rotateMatrix(transformToMatrix.rotateZ(.5));
         browser = styleToArray('rotateZ(.5rad)');
-        console.log(ttm, browser);
         return expect(ttm).to.eql(browser);
       });
     });

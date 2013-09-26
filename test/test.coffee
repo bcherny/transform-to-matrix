@@ -88,7 +88,6 @@ describe '2D', ->
 		it 'should compute the same matrix as the browser', ->
 			ttm = rotateMatrix transformToMatrix.rotateZ(.5)
 			browser = styleToArray 'rotateZ(.5rad)'
-			console.log ttm, browser
 			expect(ttm).to.eql browser
 
 	# scale
