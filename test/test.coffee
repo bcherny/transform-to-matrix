@@ -1,8 +1,9 @@
 mocha.setup('bdd')
 
 transformToMatrix = window['transform-to-matrix']
-assert = chai.assert
+expect = chai.expect
 div = document.getElementById 'test'
+precision = 100000
 
 # helpers
 rotate = [
@@ -12,12 +13,16 @@ rotate = [
 	[3, 7, 11, 15]
 ]
 
+round = (mixed) ->
+
+	Math.round(mixed*precision)/precision
+
 css = (matrix) ->
 	result = []
 	for row, j in matrix
 		for num, k in row
-			result[rotate[j][k]] = num
-	'matrix3d(' + result.join(', ') + ')'
+			result[rotate[j][k]] = round num
+	result
 
 dot = (matrix) ->
 
@@ -36,39 +41,47 @@ dot = (matrix) ->
 	result
 
 getStyle = (transform) ->
+
 	div.style[annie.transform] = transform
-	getComputedStyle(div)[annie.transform]
+	style = getComputedStyle(div)[annie.transform].slice 9, -1
+	nums = style.split ', '
+
+	for num, i in nums
+		nums[i] = round num
+
+	nums
 
 describe 'transform-to-matrix', ->
 	
 	describe '#perspective', ->
 		it 'should compute the same 3D matrix as the browser', ->
-			ttm = css dot(transformToMatrix.perspective(10))
+			ttm = css transformToMatrix.perspective(10)
 			browser = getStyle 'perspective(10px)'
-			assert.equal ttm, browser
+			expect(ttm).to.eql browser
 	
-	describe '#rotate', ->
+	describe '#rotate3d', ->
 		it 'should compute the same 3D matrix as the browser', ->
-			ttm = css transformToMatrix.rotate(1, 0, 1, .5)
+			ttm = css transformToMatrix.rotate3d(1, 0, 1, .5)
 			browser = getStyle 'rotate3d(1, 0, 1, .5rad)'
-			assert.equal ttm, browser
+			expect(ttm).to.eql browser
 	
-	describe '#perspective', ->
+	describe '#scale3d', ->
 		it 'should compute the same 3D matrix as the browser', ->
-			ttm = css transformToMatrix.perspective(10)
-			browser = getStyle 'perspective(10px)'
-			assert.equal ttm, browser
+			ttm = css transformToMatrix.scale3d(5, 10, 20)
+			browser = getStyle 'scale3d(5, 10, 20)'
+			expect(ttm).to.eql browser
 	
-	describe '#perspective', ->
+	describe '#skew', ->
 		it 'should compute the same 3D matrix as the browser', ->
-			ttm = css transformToMatrix.perspective(10)
-			browser = getStyle 'perspective(10px)'
-			assert.equal ttm, browser
+			ttm = css transformToMatrix.skew(.5, .7)
+			browser = getStyle 'skewX(.5rad) skewY(.7rad)'
+			console.log ttm, browser
+			expect(ttm).to.eql browser
 	
-	describe '#perspective', ->
+	describe '#translate3d', ->
 		it 'should compute the same 3D matrix as the browser', ->
-			ttm = css transformToMatrix.perspective(10)
-			browser = getStyle 'perspective(10px)'
-			assert.equal ttm, browser
+			ttm = css transformToMatrix.translate3d(10, 20, 30)
+			browser = getStyle 'translate3d(10px, 20px, 30px)'
+			expect(ttm).to.eql browser
 
 runner = mocha.run()

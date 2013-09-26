@@ -18,7 +18,7 @@ umd
 			[0, 0, -1/d, 1]
 		]
 
-	rotate: (x, y, z, a) ->
+	rotate3d: (x, y, z, a) ->
 
 		s = x*x + y*y + z*z
 		c = Math.cos a
@@ -33,7 +33,7 @@ umd
 			[0, 0, 0, 1]
 		]
 
-	scale: (x, y, z) ->
+	scale3d: (x, y, z) ->
 
 		[
 			[x, 0, 0, 0]
@@ -51,11 +51,11 @@ umd
 			[0, 0, 0, 1]
 		]
 
-	translate: (x, y, z) ->
+	translate3d: (x, y, z) ->
 
 		[
-			[x, 0, 0, 0],
-			[0, y, 0, 0],
-			[0, 0, z, 0],
+			[1, 0, 0, x],
+			[0, 1, 0, y],
+			[0, 0, 1, z],
 			[0, 0, 0, 1]
 		]
