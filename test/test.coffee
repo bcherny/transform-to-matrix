@@ -65,13 +65,28 @@ describe '2D', ->
 			ttm = rotateMatrix transformToMatrix.perspective(10)
 			browser = styleToArray 'perspective(10px)'
 			expect(ttm).to.eql browser
+
+	# skew
 	
 	describe '#skew', ->
 		it 'should compute the same matrix as the browser', ->
 			ttm = rotateMatrix transformToMatrix.skew(.5, .7)
-			browser = styleToArray 'skewX(.5rad) skewY(.7rad)'
-			console.log ttm, browser
+			browser = styleToArray 'skew(.5rad, .7rad)'
 			expect(ttm).to.eql browser
+	
+	describe '#skewX', ->
+		it 'should compute the same matrix as the browser', ->
+			ttm = rotateMatrix transformToMatrix.skewX(.5)
+			browser = styleToArray 'skewX(.5rad)'
+			expect(ttm).to.eql browser
+	
+	describe '#skewY', ->
+		it 'should compute the same matrix as the browser', ->
+			ttm = rotateMatrix transformToMatrix.skewY(.5)
+			browser = styleToArray 'skewY(.5rad)'
+			expect(ttm).to.eql browser
+
+	# translate
 	
 	describe '#translate', ->
 		it 'should compute the same matrix as the browser', ->

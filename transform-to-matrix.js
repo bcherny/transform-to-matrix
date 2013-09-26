@@ -29,7 +29,13 @@
       return [[x, 0, 0, 0], [0, y, 0, 0], [0, 0, z, 0], [0, 0, 0, 1]];
     },
     skew: function(x, y) {
-      return [[1, Math.tan(x, 0, 0)], [Math.tan(y, 1, 0, 0)], [0, 0, 1, 0], [0, 0, 0, 1]];
+      return [[1, Math.tan(x), 0], [Math.tan(y), 1, 0]];
+    },
+    skewX: function(x) {
+      return [[1, Math.tan(x), 0], [0, 1, 0]];
+    },
+    skewY: function(y) {
+      return [[1, 0, 0], [Math.tan(y), 1, 0]];
     },
     translate: function(x, y) {
       return [[1, 0, x], [0, 1, y]];

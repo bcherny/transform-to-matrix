@@ -53,10 +53,22 @@ fns =
 	skew: (x, y) ->
 
 		[
-			[1, Math.tan x, 0, 0]
-			[Math.tan y, 1, 0, 0]
-			[0, 0, 1, 0]
-			[0, 0, 0, 1]
+			[1, Math.tan(x), 0]
+			[Math.tan(y), 1, 0]
+		]
+
+	skewX: (x) ->
+
+		[
+			[1, Math.tan(x), 0]
+			[0, 1, 0]
+		]
+
+	skewY: (y) ->
+
+		[
+			[1, 0, 0]
+			[Math.tan(y), 1, 0]
 		]
 
 	# translate

@@ -88,8 +88,23 @@
       return it('should compute the same matrix as the browser', function() {
         var browser, ttm;
         ttm = rotateMatrix(transformToMatrix.skew(.5, .7));
-        browser = styleToArray('skewX(.5rad) skewY(.7rad)');
-        console.log(ttm, browser);
+        browser = styleToArray('skew(.5rad, .7rad)');
+        return expect(ttm).to.eql(browser);
+      });
+    });
+    describe('#skewX', function() {
+      return it('should compute the same matrix as the browser', function() {
+        var browser, ttm;
+        ttm = rotateMatrix(transformToMatrix.skewX(.5));
+        browser = styleToArray('skewX(.5rad)');
+        return expect(ttm).to.eql(browser);
+      });
+    });
+    describe('#skewY', function() {
+      return it('should compute the same matrix as the browser', function() {
+        var browser, ttm;
+        ttm = rotateMatrix(transformToMatrix.skewY(.5));
+        browser = styleToArray('skewY(.5rad)');
         return expect(ttm).to.eql(browser);
       });
     });
