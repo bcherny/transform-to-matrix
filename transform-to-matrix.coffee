@@ -7,7 +7,9 @@ umd = (factory) ->
 	else
 		@['transform-to-matrix'] = factory
 
-umd
+fns =
+
+	# perspective
 
 	perspective: (d) ->
 
@@ -17,6 +19,8 @@ umd
 			[0, 0, 1, 0]
 			[0, 0, -1/d, 1]
 		]
+
+	# rotate
 
 	rotate3d: (x, y, z, a) ->
 
@@ -33,6 +37,8 @@ umd
 			[0, 0, 0, 1]
 		]
 
+	# scale
+
 	scale3d: (x, y, z) ->
 
 		[
@@ -41,6 +47,8 @@ umd
 			[0, 0, z, 0]
 			[0, 0, 0, 1]
 		]
+
+	# skew
 
 	skew: (x, y) ->
 
@@ -51,6 +59,19 @@ umd
 			[0, 0, 0, 1]
 		]
 
+	# translate
+
+	translate: (x, y) ->
+
+		[
+			[1, 0, x],
+			[0, 1, y]
+		]
+
+	translateX: (x) -> fns.translate x, 0
+
+	translateY: (y) -> fns.translate 0, y
+
 	translate3d: (x, y, z) ->
 
 		[
@@ -59,3 +80,5 @@ umd
 			[0, 0, 1, z],
 			[0, 0, 0, 1]
 		]
+
+umd fns
