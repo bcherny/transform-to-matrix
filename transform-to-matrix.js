@@ -16,6 +16,27 @@
     perspective: function(d) {
       return [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, -1 / d, 1]];
     },
+    rotate: function(a) {
+      return fns.rotateZ(a);
+    },
+    rotateX: function(a) {
+      return fns.rotate3d(1, 0, 0, a);
+    },
+    rotateY: function(a) {
+      return fns.rotate3d(0, 1, 0, a);
+    },
+    rotateZ: function(a) {
+      var c, i, n, rs, s, x, y, z;
+      x = 0;
+      y = 0;
+      z = 1;
+      s = x * x + y * y + z * z;
+      c = Math.cos(a);
+      n = Math.sin(a);
+      i = 1 - c;
+      rs = Math.sqrt(s) * n;
+      return [[(x * x + (y * y + z * z) * c) / s, 0, (x * z * i + y * rs) / s], [(z * z + (x * x + y * y) * c) / s, 0, 0]];
+    },
     rotate3d: function(x, y, z, a) {
       var c, i, n, rs, s;
       s = x * x + y * y + z * z;

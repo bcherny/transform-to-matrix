@@ -30,15 +30,25 @@ rotateMatrix = (matrix) ->
 	result
 
 styleToArray = (transform) ->
-	sliceStart = if transform.indexOf('3d') > -1 or transform.indexOf('Z') > -1 then 9 else 7
 	div.style[annie.transform] = transform
-	style = getComputedStyle(div)[annie.transform].slice sliceStart, -1
+	style = getComputedStyle(div)[annie.transform].match(/\([^\)]+\)/)[0].slice 1, -1
 	nums = style.split ', '
-	console.log getComputedStyle(div)[annie.transform], sliceStart
 	nums[i] = round num for num, i in nums
 	nums
 
 describe '3D', ->
+	
+	describe '#rotateX', ->
+		it 'should compute the same matrix as the browser', ->
+			ttm = rotateMatrix transformToMatrix.rotateX(.5)
+			browser = styleToArray 'rotateX(.5rad)'
+			expect(ttm).to.eql browser
+	
+	describe '#rotateY', ->
+		it 'should compute the same matrix as the browser', ->
+			ttm = rotateMatrix transformToMatrix.rotateY(.5)
+			browser = styleToArray 'rotateY(.5rad)'
+			expect(ttm).to.eql browser
 	
 	describe '#rotate3d', ->
 		it 'should compute the same matrix as the browser', ->
@@ -64,6 +74,21 @@ describe '2D', ->
 		it 'should compute the same matrix as the browser', ->
 			ttm = rotateMatrix transformToMatrix.perspective(10)
 			browser = styleToArray 'perspective(10px)'
+			expect(ttm).to.eql browser
+
+	# rotate
+	
+	describe '#rotate', ->
+		it 'should compute the same matrix as the browser', ->
+			ttm = rotateMatrix transformToMatrix.rotate(.5)
+			browser = styleToArray 'rotate(.5rad)'
+			expect(ttm).to.eql browser
+	
+	describe '#rotateZ', ->
+		it 'should compute the same matrix as the browser', ->
+			ttm = rotateMatrix transformToMatrix.rotateZ(.5)
+			browser = styleToArray 'rotateZ(.5rad)'
+			console.log ttm, browser
 			expect(ttm).to.eql browser
 
 	# scale

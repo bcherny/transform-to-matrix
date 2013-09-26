@@ -3,7 +3,7 @@ umd = (factory) ->
 	if typeof exports is 'object'
 		module.exports = factory
 	else if typeof define is 'function' and define.amd
-		define([], factory)
+		define [], factory
 	else
 		@['transform-to-matrix'] = factory
 
@@ -22,6 +22,25 @@ fns =
 
 	# rotate
 
+	rotate: (a) -> fns.rotateZ a
+	rotateX: (a) -> fns.rotate3d 1, 0, 0, a
+	rotateY: (a) -> fns.rotate3d 0, 1, 0, a
+	rotateZ: (a) ->
+
+		x = 0
+		y = 0
+		z = 1
+		s = x*x + y*y + z*z
+		c = Math.cos a
+		n = Math.sin a
+		i = 1 - c
+		rs = Math.sqrt(s)*n
+
+		[
+			[(x*x + (y*y + z*z)*c)/s, 0, (x*z*i + y*rs)/s]
+			[(z*z + (x*x + y*y)*c)/s, 0, 0]
+		]
+
 	rotate3d: (x, y, z, a) ->
 
 		s = x*x + y*y + z*z
@@ -29,7 +48,6 @@ fns =
 		n = Math.sin a
 		i = 1 - c
 		rs = Math.sqrt(s)*n
-
 		[
 			[(x*x + (y*y + z*z)*c)/s, (x*y*i - z*rs)/s, (x*z*i + y*rs)/s, 0]
 			[(x*y*i + z*rs)/s,(y*y + (x*x + z*z)*c)/s, (y*z*i - x*rs)/s, 0]

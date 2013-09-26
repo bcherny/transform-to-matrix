@@ -35,12 +35,10 @@
   };
 
   styleToArray = function(transform) {
-    var i, num, nums, sliceStart, style, _i, _len;
-    sliceStart = transform.indexOf('3d') > -1 || transform.indexOf('Z') > -1 ? 9 : 7;
+    var i, num, nums, style, _i, _len;
     div.style[annie.transform] = transform;
-    style = getComputedStyle(div)[annie.transform].slice(sliceStart, -1);
+    style = getComputedStyle(div)[annie.transform].match(/\([^\)]+\)/)[0].slice(1, -1);
     nums = style.split(', ');
-    console.log(getComputedStyle(div)[annie.transform], sliceStart);
     for (i = _i = 0, _len = nums.length; _i < _len; i = ++_i) {
       num = nums[i];
       nums[i] = round(num);
@@ -49,6 +47,22 @@
   };
 
   describe('3D', function() {
+    describe('#rotateX', function() {
+      return it('should compute the same matrix as the browser', function() {
+        var browser, ttm;
+        ttm = rotateMatrix(transformToMatrix.rotateX(.5));
+        browser = styleToArray('rotateX(.5rad)');
+        return expect(ttm).to.eql(browser);
+      });
+    });
+    describe('#rotateY', function() {
+      return it('should compute the same matrix as the browser', function() {
+        var browser, ttm;
+        ttm = rotateMatrix(transformToMatrix.rotateY(.5));
+        browser = styleToArray('rotateY(.5rad)');
+        return expect(ttm).to.eql(browser);
+      });
+    });
     describe('#rotate3d', function() {
       return it('should compute the same matrix as the browser', function() {
         var browser, ttm;
@@ -81,6 +95,23 @@
         var browser, ttm;
         ttm = rotateMatrix(transformToMatrix.perspective(10));
         browser = styleToArray('perspective(10px)');
+        return expect(ttm).to.eql(browser);
+      });
+    });
+    describe('#rotate', function() {
+      return it('should compute the same matrix as the browser', function() {
+        var browser, ttm;
+        ttm = rotateMatrix(transformToMatrix.rotate(.5));
+        browser = styleToArray('rotate(.5rad)');
+        return expect(ttm).to.eql(browser);
+      });
+    });
+    describe('#rotateZ', function() {
+      return it('should compute the same matrix as the browser', function() {
+        var browser, ttm;
+        ttm = rotateMatrix(transformToMatrix.rotateZ(.5));
+        browser = styleToArray('rotateZ(.5rad)');
+        console.log(ttm, browser);
         return expect(ttm).to.eql(browser);
       });
     });
