@@ -14,74 +14,53 @@ rotate = [
 ]
 
 round = (mixed) ->
-
 	Math.round(mixed*precision)/precision
 
-css = (matrix) ->
+rotateMatrix = (matrix) ->
 	result = []
 	for row, j in matrix
 		for num, k in row
 			result[rotate[j][k]] = round num
 	result
 
-dot = (matrix) ->
-
-	def = [
-		[1, 0, 0, 0]
-		[0, 1, 0, 0]
-		[0, 0, 1, 0]
-		[0, 0, 0, 1]
-	]
-	result = [[],[],[],[]]
-
-	for row, j in matrix
-		for num, k in row
-			result[j][k] = num*def[j][0] + num*def[j][1] + num*def[j][2] + num*def[j][3]
-
-	result
-
-getStyle = (transform) ->
-
+styleToArray = (transform) ->
 	div.style[annie.transform] = transform
 	style = getComputedStyle(div)[annie.transform].slice 9, -1
 	nums = style.split ', '
-
-	for num, i in nums
-		nums[i] = round num
-
+	nums[i] = round num for num, i in nums
 	nums
 
 describe 'transform-to-matrix', ->
 	
 	describe '#perspective', ->
 		it 'should compute the same 3D matrix as the browser', ->
-			ttm = css transformToMatrix.perspective(10)
-			browser = getStyle 'perspective(10px)'
+			ttm = rotateMatrix transformToMatrix.perspective(10)
+			browser = styleToArray 'perspective(10px)'
 			expect(ttm).to.eql browser
 	
 	describe '#rotate3d', ->
 		it 'should compute the same 3D matrix as the browser', ->
-			ttm = css transformToMatrix.rotate3d(1, 0, 1, .5)
-			browser = getStyle 'rotate3d(1, 0, 1, .5rad)'
+			ttm = rotateMatrix transformToMatrix.rotate3d(1, 0, 1, .5)
+			browser = styleToArray 'rotate3d(1, 0, 1, .5rad)'
 			expect(ttm).to.eql browser
 	
 	describe '#scale3d', ->
 		it 'should compute the same 3D matrix as the browser', ->
-			ttm = css transformToMatrix.scale3d(5, 10, 20)
-			browser = getStyle 'scale3d(5, 10, 20)'
+			ttm = rotateMatrix transformToMatrix.scale3d(5, 10, 20)
+			browser = styleToArray 'scale3d(5, 10, 20)'
 			expect(ttm).to.eql browser
 	
 	describe '#skew', ->
 		it 'should compute the same 3D matrix as the browser', ->
-			ttm = css transformToMatrix.skew(.5, .7)
-			browser = getStyle 'skewX(.5rad) skewY(.7rad)'
+			ttm = rotateMatrix transformToMatrix.skew(.5, .7)
+			browser = styleToArray 'skewX(.5rad) skewY(.7rad)'
 			console.log ttm, browser
 			expect(ttm).to.eql browser
 	
 	describe '#translate3d', ->
 		it 'should compute the same 3D matrix as the browser', ->
-			ttm = css transformToMatrix.translate3d(10, 20, 30)
-			browser = getStyle 'translate3d(10px, 20px, 30px)'
+			ttm = rotateMatrix transformToMatrix.translate3d(10, 20, 30)
+			browser = styleToArray 'translate3d(10px, 20px, 30px)'
 			expect(ttm).to.eql browser
 
 runner = mocha.run()
