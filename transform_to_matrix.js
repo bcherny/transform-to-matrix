@@ -1,17 +1,19 @@
-(function() {
-  var fns, umd;
-
-  umd = function(factory) {
-    if (typeof exports === 'object') {
-      return module.exports = factory;
-    } else if (typeof define === 'function' && define.amd) {
-      return define([], factory);
-    } else {
-      return this['transform-to-matrix'] = factory;
+(function(root, factory) {
+    if(typeof exports === 'object') {
+        module.exports = factory();
     }
-  };
+    else if(typeof define === 'function' && define.amd) {
+        define('transform_to_matrix', [], factory);
+    }
+    else {
+        root.transform_to_matrix = factory();
+    }
+}(this, function() {
+var transform_to_matrix;
 
-  fns = {
+transform_to_matrix = (function() {
+  var fns;
+  return fns = {
     perspective: function(d) {
       return [[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, -1 / d, 1]];
     },
@@ -79,7 +81,7 @@
       return [[1, 0, 0, x], [0, 1, 0, y], [0, 0, 1, z], [0, 0, 0, 1]];
     }
   };
+})();
 
-  umd(fns);
-
-}).call(this);
+    return transform_to_matrix;
+}));

@@ -1,4 +1,4 @@
-transformToMatrix = window['transform-to-matrix']
+transformToMatrix = window.transform_to_matrix
 expect = chai.expect
 div = document.getElementById 'test'
 precision = 100000
@@ -41,9 +41,11 @@ test = (property, values) ->
 
 	describe '#'+property, ->
 		it 'should compute the same matrix as the browser', ->
-			ttm = rotateMatrix transformToMatrix[property].apply(@, intValues)
-			browser = styleToArray property + '(' + values.join(', ') + ')'
-			expect(ttm).to.eql browser
+			actual = rotateMatrix transformToMatrix[property].apply(@, intValues)
+			expected = styleToArray property + '(' + values.join(', ') + ')'
+			console.log actual
+			console.log expected
+			expect(actual).to.eql expected
 
 # run!
 

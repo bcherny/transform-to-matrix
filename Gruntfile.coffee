@@ -1,15 +1,20 @@
 module.exports = (grunt) ->
 
-	grunt.config.init
+	nameParts = __dirname.split '/'
+	name = nameParts[nameParts.length - 1]
+	pkg = grunt.file.readJSON 'package.json'
+	deps = grunt.util._.keys pkg.dependencies
+	config =
+
+		pkg: pkg
 
 		coffee:
-
 			compile:
-				files:
-					'transform-to-matrix.js': 'transform-to-matrix.coffee'
+				files: {}
+			options:
+				bare: true
 
 		uglify:
-
 			options:
 				mangle:
 					toplevel: true
@@ -18,15 +23,30 @@ module.exports = (grunt) ->
 					unused: true
 					join_vars: true
 				comments: false
-
 			standard:
-				files:
-					'transform-to-matrix.min.js': [
-						'transform-to-matrix.js'
-					]
+				files: {}
 
+		umd:
+			all: {}
 
+	# configure coffee, uglify, umd
+	config.coffee.compile.files[name + '.js'] = name + '.coffee'
+	config.uglify.standard.files[name + '.min.js'] = [name + '.js']
+	config.umd.all =
+		src: name + '.js'
+		objectToExport: name
+		amdModuleId: name
+		globalAlias: name
+		deps:
+			default: deps or []
+
+	# load config
+	grunt.config.init config
+
+	# load tasks
 	grunt.loadNpmTasks 'grunt-contrib-coffee'
 	grunt.loadNpmTasks 'grunt-contrib-uglify'
+	grunt.loadNpmTasks 'grunt-umd'
 
-	grunt.registerTask 'default', ['coffee', 'uglify']
+	# register tasks
+	grunt.registerTask 'default', ['coffee', 'umd', 'uglify']
