@@ -3,15 +3,15 @@
         module.exports = factory();
     }
     else if(typeof define === 'function' && define.amd) {
-        define('transform_to_matrix', [], factory);
+        define('transform-to-matrix', [], factory);
     }
     else {
-        root.transform_to_matrix = factory();
+        root['transform-to-matrix'] = factory();
     }
 }(this, function() {
-var transform_to_matrix;
+var transformtomatrix;
 
-transform_to_matrix = (function() {
+transformtomatrix = (function() {
   var fns;
   return fns = {
     perspective: function(d) {
@@ -83,5 +83,5 @@ transform_to_matrix = (function() {
   };
 })();
 
-    return transform_to_matrix;
+    return transformtomatrix;
 }));

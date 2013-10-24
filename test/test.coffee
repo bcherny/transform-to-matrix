@@ -43,8 +43,6 @@ test = (property, values) ->
 		it 'should compute the same matrix as the browser', ->
 			actual = rotateMatrix transformToMatrix[property].apply(@, intValues)
 			expected = styleToArray property + '(' + values.join(', ') + ')'
-			console.log actual
-			console.log expected
 			expect(actual).to.eql expected
 
 # run!

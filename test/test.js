@@ -55,8 +55,6 @@ test = function(property, values) {
       var actual, expected;
       actual = rotateMatrix(transformToMatrix[property].apply(this, intValues));
       expected = styleToArray(property + '(' + values.join(', ') + ')');
-      console.log(actual);
-      console.log(expected);
       return expect(actual).to.eql(expected);
     });
   });

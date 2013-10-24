@@ -1,4 +1,4 @@
-transform_to_matrix = do ->
+transformtomatrix = do ->
 
 	fns =
 

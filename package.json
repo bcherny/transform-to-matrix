@@ -1,8 +1,8 @@
 {
-  "name": "transform_to_matrix",
-  "version": "0.1.0",
+  "name": "transform-to-matrix",
+  "version": "0.1.1",
   "description": "A tiny library to get 2/3D matricies from CSS3 transform functions. Fully covered by unit tests, with support for AMD, CommonJS, Node, and browser globals.",
-  "main": "transform_to_matrix.js",
+  "main": "transform-to-matrix.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/eighttrackmind/transform-to-matrix.git"
